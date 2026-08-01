@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SECTiON — เขียนและอ่านนิยาย</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.44.0/iconfont/tabler-icons.min.css">
+<link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ============ LIBRARY PAGE ============ -->
+  <div class="page" id="page-library">
+    <div class="glass-card topbar">
+      <div class="brand" data-nav="/library"><div class="mark"><i class="ti ti-feather"></i></div> SECTiON</div>
+      <div class="search-wrap"><i class="ti ti-search"></i><input id="search-input" placeholder="ค้นหานิยาย..."></div>
+      <div class="topbar-actions">
+        <div class="icon-btn" id="theme-toggle"><i class="ti ti-moon"></i></div>
+        <div class="avatar" id="user-avatar" title="ออกจากระบบ">?</div>
+      </div>
+    </div>
+
+    <div class="glass-card hero-banner" id="hero-banner">
+      <div class="hero-eyebrow">กำลังเขียนอยู่</div>
+      <h3 class="hero-title" id="hero-title">ยังไม่มีนิยายที่กำลังเขียน</h3>
+      <p class="hero-sub" id="hero-sub">เริ่มต้นเรื่องราวใหม่ของคุณได้เลยตอนนี้</p>
+      <button class="hero-btn" id="hero-btn"><i class="ti ti-plus"></i> เริ่มนิยายใหม่</button>
+    </div>
+
+    <div class="section-title"><h2>ห้องสมุดของฉัน</h2><span id="manage-toggle">จัดการ</span></div>
+    <div class="glass-card" style="padding:20px;">
+      <div class="grid-wide" id="library-grid">
+        <!-- novels injected here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ READER PAGE ============ -->
+  <div class="page" id="page-reader">
+    <div class="glass-card reader-topbar">
+      <div>
+        <div class="reader-title" id="reader-novel-title">—</div>
+        <div class="reader-chapter" id="reader-chapter-title">—</div>
+      </div>
+      <div class="reader-controls">
+        <div class="icon-btn" data-nav="/library"><i class="ti ti-x"></i></div>
+      </div>
+    </div>
+
+    <div class="glass-card reader-body" id="reader-body" oncontextmenu="return false;">
+      <h3 id="reader-chapter-heading">—</h3>
+      <div id="reader-content"></div>
+    </div>
+    <div class="protect-note"><i class="ti ti-shield-lock"></i> การคัดลอกเนื้อหาถูกปิดใช้งานในหน้านี้</div>
+
+    <div class="glass-card reader-footer">
+      <div class="nav-btn" id="prev-chapter-btn"><i class="ti ti-chevron-left"></i> ตอนก่อนหน้า</div>
+      <div class="progress-track"><div class="progress-fill" id="reader-progress-fill"></div></div>
+      <div class="nav-btn" id="next-chapter-btn">ตอนถัดไป <i class="ti ti-chevron-right"></i></div>
+    </div>
+  </div>
+
+  <!-- ============ EDITOR PAGE ============ -->
+  <div class="page" id="page-editor">
+    <div class="glass-card topbar" style="margin-bottom:18px;">
+      <div class="brand" data-nav="/library"><div class="mark"><i class="ti ti-feather"></i></div> SECTiON</div>
+      <div style="font-size:13px; color:var(--ink-2); display:flex; align-items:center; gap:6px;" id="save-status">
+        <i class="ti ti-circle-check" style="color:#2f855a;"></i> บันทึกอัตโนมัติแล้ว
+      </div>
+      <div class="topbar-actions"><div class="avatar" id="editor-avatar">?</div></div>
+    </div>
+
+    <div class="editor-shell">
+      <div class="glass-card editor-side">
+        <h4 id="editor-novel-title">ตอนทั้งหมด</h4>
+        <div id="chapter-list"></div>
+        <button class="add-chapter" id="add-chapter-btn"><i class="ti ti-plus"></i> เพิ่มตอนใหม่</button>
+      </div>
+
+      <div class="glass-card editor-main">
+        <div class="editor-toolbar">
+          <div class="toolbar-icons">
+            <div class="icon-btn"><i class="ti ti-bold"></i></div>
+            <div class="icon-btn"><i class="ti ti-italic"></i></div>
+            <div class="icon-btn"><i class="ti ti-align-left"></i></div>
+          </div>
+          <button class="save-btn" id="manual-save-btn"><i class="ti ti-device-floppy"></i> บันทึก</button>
+        </div>
+        <input class="editor-titlefield" id="chapter-title-input" placeholder="ชื่อตอน...">
+        <textarea class="editor-textarea" id="chapter-content-input" placeholder="เริ่มเขียนเรื่องราวของคุณที่นี่..."></textarea>
+        <div class="word-count"><span id="word-count-display">0 คำ</span><span>บันทึกในฐานข้อมูลของเซิร์ฟเวอร์</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ LOGIN PAGE ============ -->
+  <div class="page" id="page-login">
+    <div class="login-wrap">
+      <div class="glass-card login-card">
+        <div class="login-mark"><i class="ti ti-feather"></i></div>
+
+        <div class="form-toggle-view active" id="login-view">
+          <h2>ยินดีต้อนรับกลับ</h2>
+          <p class="sub">เข้าสู่ระบบเพื่อกลับไปเขียนและอ่านนิยายของคุณ</p>
+          <div class="form-error" id="login-error"></div>
+          <form id="login-form">
+            <div class="field">
+              <label>ชื่อผู้ใช้</label>
+              <input name="username" placeholder="username" autocomplete="username" required>
+            </div>
+            <div class="field">
+              <label>รหัสผ่าน</label>
+              <input type="password" name="password" placeholder="••••••••" autocomplete="current-password" required>
+            </div>
+            <button type="submit" class="login-btn">เข้าสู่ระบบ</button>
+          </form>
+
+          <div class="divider">หรือ</div>
+          <button class="guest-btn" id="guest-btn"><i class="ti ti-user"></i> เข้าใช้งานแบบผู้เยี่ยมชม</button>
+
+          <p class="login-foot">ยังไม่มีบัญชี? <a id="show-register">สมัครสมาชิก</a></p>
+        </div>
+
+        <div class="form-toggle-view" id="register-view">
+          <h2>สร้างบัญชีใหม่</h2>
+          <p class="sub">เริ่มต้นเขียนและอ่านนิยายของคุณวันนี้</p>
+          <div class="form-error" id="register-error"></div>
+          <form id="register-form">
+            <div class="field">
+              <label>ชื่อที่แสดง</label>
+              <input name="displayName" placeholder="ชื่อของคุณ" required>
+            </div>
+            <div class="field">
+              <label>ชื่อผู้ใช้</label>
+              <input name="username" placeholder="3-20 ตัวอักษร a-z, 0-9, _" autocomplete="username" required>
+            </div>
+            <div class="field">
+              <label>รหัสผ่าน</label>
+              <input type="password" name="password" placeholder="อย่างน้อย 8 ตัวอักษร" autocomplete="new-password" required>
+            </div>
+            <button type="submit" class="login-btn">สมัครสมาชิก</button>
+          </form>
+          <p class="login-foot">มีบัญชีอยู่แล้ว? <a id="show-login">เข้าสู่ระบบ</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="/js/api.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>
