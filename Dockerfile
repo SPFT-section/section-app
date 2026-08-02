@@ -15,7 +15,8 @@ RUN npm ci --omit=dev
 
 COPY . .
 
-# SQLite data lives here; mount a Fly volume at this path for persistence
+# SQLite data lives here; mount a persistent disk at this path
+# (Fly.io volume or Render persistent disk) so data survives redeploys
 ENV DATA_DIR=/app/data
 RUN mkdir -p /app/data
 
