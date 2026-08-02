@@ -1,0 +1,14 @@
+node_modules
+data
+.env
+.env.local
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+.git
+.gitignore
+README.md
+railway.json
+nixpacks.toml
+.nvmrc
