@@ -1,4 +1,4 @@
-FROM node:20-bookworm-slim AS base
+FROM node:22-bookworm-slim AS base
 
 # build tools as a fallback in case better-sqlite3 has no prebuilt binary
 # for this exact platform/arch (avoids the Nixpacks "no Python" failure)
